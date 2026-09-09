@@ -98,7 +98,8 @@ document your observations.
 ``` r
 ## TASK: Plot `price` vs `carat` below
 ## Your code here!
-ggplot(diamonds) +
+diamonds %>%
+  ggplot() +
   geom_point(
     aes( x = carat, y = price)
   )
@@ -114,7 +115,8 @@ carat, for the most part, corresponds to an increase in price.
 ``` r
 ## TASK: Plot `price`, `carat`, and `cut` below
 ## Your code here!
-ggplot(diamonds) +
+diamonds %>% 
+  ggplot() +
   geom_point(
     aes( x = carat, y = price, color = cut)
   )
@@ -122,10 +124,11 @@ ggplot(diamonds) +
 
 ![](c00-diamonds-assignment_files/figure-gfm/q2-task-1.png)<!-- -->
 
-**Observations**: Having added a new variable, cut, we are able to see
-that even with a low carat weight like 1, if the cut is ideal, it
-corresponds to a higher price, sometimes even higher than a diamond of 2
-carats with a fair cut.
+**Observations**: Having added a new variable, we can better see how
+carat has a major influence in price. Despite the fact that a 5 carat
+diamond may have a fair cut, the lowest of cuts, it still costs
+significantly more. This is due to the fact that higher carat diamonds
+are harder to come across, thus, they cost more.
 
 # Communication
 
