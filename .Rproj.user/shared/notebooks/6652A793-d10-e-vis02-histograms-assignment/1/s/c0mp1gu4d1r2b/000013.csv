@@ -1,0 +1,4 @@
+"0","## TASK: Make a histogram of"
+"0","mpg %>%"
+"0","  ggplot(aes(cty)) +"
+"0","  geom_histogram(bins = 20)"

@@ -1,0 +1,32 @@
+{
+    "id": "11A99362",
+    "path": "~/data-science-2026/exercises_sequenced/d07-e-data01-isolate-assignment.Rmd",
+    "project_path": "exercises_sequenced/d07-e-data01-isolate-assignment.Rmd",
+    "type": "r_markdown",
+    "hash": "3947946647",
+    "contents": "",
+    "dirty": false,
+    "created": 1788448214566.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "rmdVisualMode": "true",
+        "rmdVisualWrapConfigured": "true",
+        "docOutlineVisible": "1",
+        "cursorPosition": "289,0",
+        "scrollLine": "0",
+        "rmdVisualModeLocation": "2:0",
+        "rmdVisualCollapsedChunks": "",
+        "last_setup_crc32": ""
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1788354628,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1789087396141,
+    "read_only": false,
+    "read_only_alternatives": []
+}

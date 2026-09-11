@@ -1,0 +1,4 @@
+"0","mpg %>%"
+"0","  count(trans) %>%"
+"0","  ggplot(aes(x = trans, y = n)) +"
+"0","  geom_col()"

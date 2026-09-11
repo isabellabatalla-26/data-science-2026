@@ -1,0 +1,32 @@
+{
+    "id": "3505E917",
+    "path": "~/data-science-2026/exercises_sequenced/d09-e-data02-derive-assignment.Rmd",
+    "project_path": "exercises_sequenced/d09-e-data02-derive-assignment.Rmd",
+    "type": "r_markdown",
+    "hash": "2919259660",
+    "contents": "",
+    "dirty": false,
+    "created": 1788697743305.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "rmdVisualMode": "true",
+        "rmdVisualWrapConfigured": "true",
+        "docOutlineVisible": "1",
+        "cursorPosition": "173,0",
+        "scrollLine": "0",
+        "rmdVisualModeLocation": "6980:7039.5",
+        "rmdVisualCollapsedChunks": "",
+        "last_setup_crc32": "b1792751b049b5"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1789087395,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1789087395897,
+    "read_only": false,
+    "read_only_alternatives": []
+}

@@ -1,7 +1,7 @@
 Getting Started: Diamonds
 ================
 Isabella Batalla Salinas
-Sept. 1, 2026
+Sept. 9, 2026
 
 - [Grading Rubric](#grading-rubric)
   - [Individual](#individual)

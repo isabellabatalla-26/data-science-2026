@@ -1,7 +1,7 @@
 Michelson Speed-of-light Measurements
 ================
 Isabella Batalla Salinas
-2020-
+Sept. 10, 2026
 
 - [Grading Rubric](#grading-rubric)
   - [Individual](#individual)
@@ -357,8 +357,8 @@ df_q2 %>%
 Based on this graph, it seems as if the higher the distinctness, the
 more clustered the data is. When looking at the data under 3, for
 distinctness, there seem to be less gaps in between the data which
-concentrates from around 299800 and 300100. For the data under 1, for
-distinctness, however there are many gaps and even an outlier at around
+concentrates from around 299800 and 300100. For the data under 1 (for
+distinctness) however, there are many gaps and even an outlier at around
 299700. This disparity in data for lower distinctness can be reasoned
 through the fact that the lower the distinctness, the lower the quality
 of measured images.

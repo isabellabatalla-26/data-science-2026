@@ -1,0 +1,7 @@
+"0","## TODO: Compare Michelson's estimate and error against the true value"
+"0","true_error = abs(LIGHTSPEED_VACUUM - LIGHTSPEED_MICHELSON)"
+"0","true_error"
+"1","[1]"
+"1"," 151.542"
+"1","
+"

@@ -1,0 +1,32 @@
+{
+    "id": "4E2D7828",
+    "path": "~/data-science-2026/exercises_sequenced/d08-e-vis01-bar-charts-assignment.Rmd",
+    "project_path": "exercises_sequenced/d08-e-vis01-bar-charts-assignment.Rmd",
+    "type": "r_markdown",
+    "hash": "2655725522",
+    "contents": "",
+    "dirty": false,
+    "created": 1788354624843.0,
+    "source_on_save": false,
+    "relative_order": 5,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "rmdVisualMode": "true",
+        "rmdVisualWrapConfigured": "true",
+        "docOutlineVisible": "1",
+        "cursorPosition": "249,0",
+        "scrollLine": "0",
+        "rmdVisualModeLocation": "2:0",
+        "rmdVisualCollapsedChunks": "",
+        "last_setup_crc32": ""
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1789087396,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1789087396100,
+    "read_only": false,
+    "read_only_alternatives": []
+}

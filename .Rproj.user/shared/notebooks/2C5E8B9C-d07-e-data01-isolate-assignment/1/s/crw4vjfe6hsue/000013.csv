@@ -1,0 +1,3 @@
+"0","## df_q6a <- dest is JFK, LGA, or EWR"
+"0","flights %>%"
+"0","  filter(dest == ""JFK"" | dest == ""LGA"" | dest == ""EWR"")"
