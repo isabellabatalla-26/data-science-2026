@@ -1,4 +1,0 @@
-"0","## NOTE: No need to edit"
-"0","diamonds %>% "
-"0","  mutate(`mass(g)` = carat / 5) %>% "
-"0","  select(`mass(g)`, everything())"

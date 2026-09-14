@@ -1,7 +1,0 @@
-"0","## TASK: Visualize counts against `Class` and `Sex`"
-"0",""
-"0","df_titanic %>%"
-"0","  filter(Survived == ""Yes"") %>%"
-"0","  ggplot("
-"0","    aes(x = Class, y = n, fill = Sex)) +"
-"0","      geom_col(position = ""dodge"")"

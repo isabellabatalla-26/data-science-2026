@@ -1,4 +1,0 @@
-"0","df_q2 <-"
-"0","  diamonds %>%"
-"0","  summarize(n_ideal = sum(cut == ""Ideal""))"
-"0","df_q2"

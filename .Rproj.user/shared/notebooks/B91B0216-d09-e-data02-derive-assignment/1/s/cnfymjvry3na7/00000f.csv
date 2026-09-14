@@ -1,3 +1,0 @@
-"0","## NOTE: This does the same as the previous code chunk"
-"0","diamonds %>% "
-"0","  count(cut)"

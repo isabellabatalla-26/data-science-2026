@@ -1,3 +1,0 @@
-"0","## NOTE: No need to edit"
-"0","flights %>% "
-"0","  select(flight, carrier, dep_time)"

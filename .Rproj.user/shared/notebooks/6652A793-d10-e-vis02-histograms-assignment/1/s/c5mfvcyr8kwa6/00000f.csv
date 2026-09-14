@@ -1,4 +1,0 @@
-"0","## NOTE: No need to modify"
-"0","mpg %>%"
-"0","  ggplot(aes(displ)) +"
-"0","  geom_histogram(bins = 5)"

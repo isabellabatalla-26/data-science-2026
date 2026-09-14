@@ -1,4 +1,0 @@
-"0","## NOTE: Do not edit this"
-"0","tibble(a = c(1, 2, 2, 3, 3, 3)) %>% "
-"0","  ggplot(aes(x = a)) +"
-"0","  geom_bar()"

@@ -1,7 +1,0 @@
-"0","## NOTE: No need to change this!"
-"0","assertthat::assert_that(abs(df_q4 %>% pull(cov_depth) - 0.02320057) < 1e-3)"
-"1","[1m[33mError[39m in `pull()`:[22m
-[1mCaused by error:[22m
-[33m![39m object 'cov_depth' not found
-[90mRun `]8;;x-r-run:rlang::last_trace()rlang::last_trace()]8;;` to see where the error occurred.[39m
-"

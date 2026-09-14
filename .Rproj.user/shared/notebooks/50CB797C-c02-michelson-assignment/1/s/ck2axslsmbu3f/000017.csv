@@ -1,5 +1,0 @@
-"0","## TODO: Compute summaries"
-"0","df_q1 <-df_michelson %>% group_by(Distinctness) %>% summarize(n = n(), MeanVelocity = mean(Velocity))"
-"0","df_q1 %>%"
-"0","  arrange(desc(Distinctness)) %>%"
-"0","  knitr::kable()"

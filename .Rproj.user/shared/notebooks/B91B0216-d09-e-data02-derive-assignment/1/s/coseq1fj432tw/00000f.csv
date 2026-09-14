@@ -1,3 +1,0 @@
-"0","## NOTE: No need to edit"
-"0","diamonds %>% "
-"0","  summarize(price_mean = mean(price))"

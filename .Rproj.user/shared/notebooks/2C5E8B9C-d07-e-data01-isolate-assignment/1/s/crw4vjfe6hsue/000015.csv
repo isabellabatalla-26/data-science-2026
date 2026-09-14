@@ -1,4 +1,0 @@
-"0","  "
-"0","## df_q6b <- origin is JFK, LGA, or EWR"
-"0","flights %>%"
-"0","  filter(origin == ""JFK"" | origin == ""LGA"" | origin == ""EWR"")"

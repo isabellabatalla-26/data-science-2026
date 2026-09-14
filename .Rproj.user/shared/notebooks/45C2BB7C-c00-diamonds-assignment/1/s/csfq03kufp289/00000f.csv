@@ -1,7 +1,0 @@
-"0","## TASK: Plot `price`, `carat`, and `cut` below"
-"0","## Your code here!"
-"0","diamonds %>% "
-"0","  ggplot() +"
-"0","  geom_point("
-"0","    aes( x = carat, y = price, color = cut)"
-"0","  )"
