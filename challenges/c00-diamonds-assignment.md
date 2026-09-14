@@ -99,10 +99,8 @@ document your observations.
 ## TASK: Plot `price` vs `carat` below
 ## Your code here!
 diamonds %>%
-  ggplot() +
-  geom_point(
-    aes( x = carat, y = price)
-  )
+  ggplot(aes( x = carat, y = price)) +
+  geom_point()
 ```
 
 ![](c00-diamonds-assignment_files/figure-gfm/q1-task-1.png)<!-- -->
@@ -116,10 +114,8 @@ carat, for the most part, corresponds to an increase in price.
 ## TASK: Plot `price`, `carat`, and `cut` below
 ## Your code here!
 diamonds %>% 
-  ggplot() +
-  geom_point(
-    aes( x = carat, y = price, color = cut)
-  )
+  ggplot(aes( x = carat, y = price, color = cut)) +
+  geom_point()
 ```
 
 ![](c00-diamonds-assignment_files/figure-gfm/q2-task-1.png)<!-- -->

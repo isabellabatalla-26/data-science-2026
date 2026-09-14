@@ -60,10 +60,8 @@ In this first stage, you will explore the `diamonds` dataset and document your o
 ## TASK: Plot `price` vs `carat` below
 ## Your code here!
 diamonds %>%
-  ggplot() +
-  geom_point(
-    aes( x = carat, y = price)
-  )
+  ggplot(aes( x = carat, y = price)) +
+  geom_point()
 
 ```
 
@@ -75,10 +73,8 @@ diamonds %>%
 ## TASK: Plot `price`, `carat`, and `cut` below
 ## Your code here!
 diamonds %>% 
-  ggplot() +
-  geom_point(
-    aes( x = carat, y = price, color = cut)
-  )
+  ggplot(aes( x = carat, y = price, color = cut)) +
+  geom_point()
 ```
 
 **Observations**: Having added a new variable, we can better see how carat has a major influence in price. Despite the fact that a 5 carat diamond may have a fair cut, the lowest of cuts, it still costs significantly more. This is due to the fact that higher carat diamonds are harder to come across, thus, they cost more.
