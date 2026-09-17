@@ -323,8 +323,8 @@ between Michelson’s estimate and `LIGHTSPEED_VACUUM`?
 #date
 #distinct
 df_q2 %>%
-  ggplot() +
-  geom_point(aes(x = Temp, y = VelocityVacuum)) +
+  ggplot(aes(x = Temp, y = VelocityVacuum)) +
+  geom_point() +
   theme_minimal() +
   labs(
     x = "Temperature (F)",
@@ -343,8 +343,8 @@ low as 299750 and as high as 300150.
 ``` r
 #distinct
 df_q2 %>%
-  ggplot() +
-  geom_point(aes(x = Distinctness, y = VelocityVacuum)) +
+  ggplot(aes(x = Distinctness, y = VelocityVacuum)) +
+  geom_point() +
   theme_minimal() +
   labs(
     x = "Distinctness",
@@ -368,8 +368,8 @@ of measured images.
 df_q2 %>%
   group_by(Date) %>%
   summarise(mean_velocity = mean(VelocityVacuum))%>%
-  ggplot() +
-  geom_point(aes(x = Date, y = mean_velocity)) +
+  ggplot(aes(x = Date, y = mean_velocity)) +
+  geom_point() +
   theme_minimal() +
   labs(
     x = "Date of recorded data",
