@@ -28,7 +28,6 @@ Sept.5 2026
     *did* survive, along with aesthetics for `Class`, `Sex`, *and*
     `Age`. Document your observations
     below.](#q5-create-a-plot-showing-the-group-proportion-of-occupants-who-did-survive-along-with-aesthetics-for-class-sex-and-age-document-your-observations-below)
-- [Notes](#notes)
 
 *Purpose*: Most datasets have at least a few variables. Part of our task
 in analyzing a dataset is to understand trends as they vary across these
@@ -159,11 +158,13 @@ df_titanic %>%
 
 **Observations**:
 
-It seems like among all classes (1st, 2nd, and 3rd) the female survival
-rate was higher, especially for first and second class. For the crew,
-however, the survival rate for males was higher. This could possibly be
-attributed to the fact that the crew was made up of mostly men. \#
-Deeper Look <!-- -------------------------------------------------- -->
+Among survivors, there were more females than males in 1st and 2nd
+class, and roughly similar counts in 3rd class. Among Crew, however,
+male survivors far outnumber female survivors. This is likely because
+the crew was predominantly male, so this doesn’t necessarily indicate a
+higher survival rate for men, just a larger pool of male crew members to
+begin with. \# Deeper Look
+<!-- -------------------------------------------------- -->
 
 Raw counts give us a sense of totals, but they are not as useful for
 understanding differences between groups. This is because the
@@ -221,13 +222,26 @@ df_prop %>%
 
 - Write your observations here.
 
+  Compared to Q3, the Q4 plot gives a clearer picture since it controls
+  for group size. Crew looked like it had way more survivors in Q3, but
+  that’s just because there were so many crew members overall.
+  Similarly, 3rd class had a large number of passengers, so its survivor
+  counts in Q3 could look misleadingly high or low depending on the
+  group. Switching to proportions makes the comparisons across classes
+  and sexes more fair, since it’s showing how likely someone in that
+  group was to survive, not just how many people happened to.
+
 - Is there anything *fishy* going on in your plot?
 
   Based on the plot alone, it seems like most of the females in 1st and
   2nd class survived in proportion to the total amount of females in
-  each class. One thing, to note is that the rows which contain zero
-  such as “Child” and “Crew” aren’t on the plot. This is because there
-  were no child crew members on the Titanic.
+  each class. Males, on the other hand, had a noticeably lower survival
+  proportion in those same classes. One thing to note is that the rows
+  which contain zero such as “Child” and “Crew” aren’t on the plot. This
+  is because there were no child crew members on the Titanic. The gap
+  between male and female survival proportion isn’t fishy, though, it
+  lines up with the “women and children first” protocol used during the
+  Titanic evacuation.
 
 ### **q5** Create a plot showing the group-proportion of occupants who *did* survive, along with aesthetics for `Class`, `Sex`, *and* `Age`. Document your observations below.
 
@@ -263,13 +277,13 @@ didn’t fare as well.
   equal survival rate compared to other classes. In this plot, however,
   it can be seen how that doesn’t exactly hold up. For males,
   especially, the survival rate in proportion to age and class is not
-  actually that high. One reason as to why it may seem like it is, is
-  because the plot on q4 wasn’t accounting for age. When we account for
-  age we are able to see how all child males in the first and second
-  class survived, this may skew the data to look higher when we don’t
-  take age into account.
+  actually that high. One reason it may seem this way is that the Q4
+  plot doesn’t split by age, so each bar combines children and adults
+  into a single proportion. Since nearly all children survived, that
+  gets blended in with the lower adult survival rate, making the
+  combined bar look higher than the adult rate alone.
 
-# Notes
+  Notes
 
 <!-- -------------------------------------------------- -->
 
