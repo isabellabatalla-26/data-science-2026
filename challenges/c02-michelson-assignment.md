@@ -135,24 +135,30 @@ df_michelson %>% glimpse()
 
 ``` r
 ## TODO: Compute summaries
-df_q1 <-df_michelson %>% group_by(Distinctness) %>% summarize(n = n(), MeanVelocity = mean(Velocity))
+df_q1 <-
+  df_michelson %>% 
+  group_by(Distinctness) %>% 
+  summarize(n = n(), 
+        MeanVelocity = mean(Velocity)
+        )
 df_q1 %>%
-  arrange(desc(Distinctness)) %>%
-  knitr::kable()
+  arrange(desc(Distinctness))
 ```
 
-| Distinctness |   n | MeanVelocity |
-|:-------------|----:|-------------:|
-| 3            |  46 |     299861.7 |
-| 2            |  39 |     299858.5 |
-| 1            |  15 |     299808.0 |
+    ## # A tibble: 3 × 3
+    ##   Distinctness     n MeanVelocity
+    ##   <fct>        <int>        <dbl>
+    ## 1 3               46      299862.
+    ## 2 2               39      299858.
+    ## 3 1               15      299808
 
 **Observations**: - Write your observations here! - (Your response
-here) - Why might your table differ from Michelson’s? - It seems like
-the reason the table differs a bit is due to rounding. For the first row
-(distinctness = 3) the table rounds down to 60 instead of 61.7. The
-other rows seem to follow the same rounding format where they’ll round
-down if the one’s places \< 5 and up if \> 5.
+here) - Why might your table differ from Michelson’s? -
+
+It seems like the reason the table differs a bit is due to rounding. For
+the first row (distinctness = 3) the table rounds down to 60 instead of
+61.7. The other rows seem to follow the same rounding format where
+they’ll round down if the one’s places \< 5 and up if \> 5.
 
 The `Velocity` values in the data set are the speed of light *in air*;
 Michelson introduced a couple of adjustments to estimate the speed of
@@ -218,12 +224,19 @@ true_error
 
     ## [1] 151.542
 
+``` r
+ratio <- abs(true_error / LIGHTSPEED_PM)
+ratio
+```
+
+    ## [1] 2.971412
+
 **Observations**: - Is Michelson’s estimate of the error (his
 uncertainty) greater or less than the true error? - (Your response here)
 
 Michelson’s uncertainty of 51 km/s is less than the true error of 151.54
 km/s. This means that Michelson’s estimate of uncertainty was
-overconfident.
+overconfident by roughly a factor of 3.
 
 The following plot shows all of Michelson’s data as a [control
 chart](https://en.wikipedia.org/wiki/Control_chart); this sort of plot
@@ -305,18 +318,21 @@ df_q2 %>%
 ![](c02-michelson-assignment_files/figure-gfm/q4-cf-real-simulated-1.png)<!-- -->
 
 **Observations**: Similarities - Looking at the graphs above, we can see
-how the real data has more peaks along the mean that are outside of the
-LIGHTSPEED_MICHELSON + LIGHTSPEED_PM and LIGHTSPEED_MICHELSON -
-LIGHTSPEED_PM. In addition, the real data has both higher and lower
-recorded values.
+how both the real data and simulated data seem to cluster a bit between
+Jun 16 and Jun 23. While the clustering isn’t exactly the same, the
+pattern is there in both.
 
-Differences - One similarity from the both of the graphs, is how the
-data seems to cluster between Jun 16 and Jun 23. While the clustering
-isn’t exactly the same, the pattern is there. \### **q5** You have
-access to a few other variables. Construct a **at least three**
-visualizations of `VelocityVacuum` against these other factors. Are
-there other patterns in the data that might help explain the difference
-between Michelson’s estimate and `LIGHTSPEED_VACUUM`?
+Differences - The real data has more peaks along the mean that are
+outside of Michelson’s uncertainty interval (LIGHTSPEED_MICHELSON ±
+LIGHTSPEED_PM) compared to the simulated data. In addition, the real
+data has both higher and lower recorded values than the simulated data,
+meaning the real measurements swing more extremely in both directions
+than what the probability model predicts.
+
+\### **q5** You have access to a few other variables. Construct a **at
+least three** visualizations of `VelocityVacuum` against these other
+factors. Are there other patterns in the data that might help explain
+the difference between Michelson’s estimate and `LIGHTSPEED_VACUUM`?
 
 ``` r
 #temp 
@@ -355,13 +371,14 @@ df_q2 %>%
 ![](c02-michelson-assignment_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 Based on this graph, it seems as if the higher the distinctness, the
-more clustered the data is. When looking at the data under 3, for
-distinctness, there seem to be less gaps in between the data which
-concentrates from around 299800 and 300100. For the data under 1 (for
-distinctness) however, there are many gaps and even an outlier at around
-299700. This disparity in data for lower distinctness can be reasoned
-through the fact that the lower the distinctness, the lower the quality
-of measured images.
+less gaps there are between the data points, and there seem to be fewer
+extreme outliers as distinctness increases. When looking at the data
+under distinctness = 3, there are less gaps in between the points, which
+mostly concentrate from around 299800 to 300100. For the data under
+distinctness = 1, however, there are noticeably more gaps between
+points, and there’s even an outlier at around 299700. This disparity for
+lower distinctness can be reasoned through the fact that the lower the
+distinctness, the lower the quality of measured images.
 
 ``` r
 #Date
@@ -385,6 +402,19 @@ his data, the data had a lot of variation. With severe outliers such as
 a generalization of what the velocity in a vacuum is. However, as the
 days passed, the data seems to cluster a bit more between 299875 and
 299975 which seems to be in line with his final estimate of 299944.
+
+Overall conclusion:
+
+There seem to be patterns that help explain the difference between
+Michelson’s estimate and LIGHTSPEED_VACUUM. The Temperature graph shows
+that as temperature increases, recorded velocity tends to increase as
+well, suggesting temperature may have influenced his readings beyond the
+flat +92 km/s correction he applied. The Distinctness graph shows that
+as distinctness increases, there are less gaps between the data points,
+meaning better image quality led to more consistent measurements. And
+the Date graph shows that as the days went on, the data seems to get
+closer to Michelson’s final estimate, which could be explained by him
+tweaking or refining the experiment as time passed.
 
 ## Bibliography
 
