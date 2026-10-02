@@ -240,25 +240,6 @@ df_stang_long %>% glimpse
     ## $ nu    <dbl> 0.321, 0.329, 0.310, 0.323, 0.331, 0.323, 0.329, 0.318, 0.322, 0…
 
 ``` r
-df_stang_long ["alloy"]
-```
-
-    ## # A tibble: 26 × 1
-    ##    alloy  
-    ##    <chr>  
-    ##  1 al_24st
-    ##  2 al_24st
-    ##  3 al_24st
-    ##  4 al_24st
-    ##  5 al_24st
-    ##  6 al_24st
-    ##  7 al_24st
-    ##  8 al_24st
-    ##  9 al_24st
-    ## 10 al_24st
-    ## # ℹ 16 more rows
-
-``` r
 df_stang_long ["thick"]
 ```
 
@@ -276,6 +257,28 @@ df_stang_long ["thick"]
     ##  9 0.032
     ## 10 0.032
     ## # ℹ 16 more rows
+
+``` r
+df_stang_long %>%
+  distinct(alloy)
+```
+
+    ## # A tibble: 1 × 1
+    ##   alloy  
+    ##   <chr>  
+    ## 1 al_24st
+
+``` r
+df_stang_long %>%
+  distinct(angle)
+```
+
+    ## # A tibble: 3 × 1
+    ##   angle
+    ##   <int>
+    ## 1     0
+    ## 2    45
+    ## 3    90
 
 **Observations**:
 
@@ -320,16 +323,33 @@ df_stang_long %>%
 
 ![](c03-stang-assignment_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
 
+``` r
+df_stang_long %>%
+  group_by(angle) %>%
+  summarize(
+    nu_min = min(nu),
+    nu_max = max(nu),
+  )
+```
+
+    ## # A tibble: 3 × 3
+    ##   angle nu_min nu_max
+    ##   <int>  <dbl>  <dbl>
+    ## 1     0  0.311  0.329
+    ## 2    45  0.312  0.331
+    ## 3    90  0.31   0.33
+
 **Observations**:
 
 For E, thickness doesn’t seem to have one clear directional effect
 across the board. Instead, the biggest drop happens at the largest
 thickness (0.081), where E is noticeably lower in all three angles,
 while the values at smaller thicknesses stay fairly similar to each
-other. For nu, the data is more scattered and doesn’t show a clear trend
-with thickness, but 45 degrees stands out because its lowest values are
-still higher than the lowest values at 0 and 90 degrees, even though the
-highest values are about the same across all three angles.
+other. For nu, the data are scattered and show no clear trend with
+thickness. The value ranges are nearly identical across angles (0°:
+0.311–0.329, 45°: 0.312–0.331, 90°: 0.310–0.330). The 45° group is
+shifted slightly higher, with a minimum 0.001 above the others, but a
+shift this small doesn’t have much of a meaninful difference.
 
 ### **q4** Consider the following statement:
 
@@ -357,16 +377,17 @@ df_stang_long %>%
 
 - Does this graph support or contradict the claim above?
 
-  It mostly supports it. If E depended on the amount of material, plates
-  3.7 times thicker would have an E about 3.7 times larger, but all the
-  dots fall within a range of about 9,900 to 10,700. The purple
-  (thickest) plates sit a bit lower than the rest, which is something
-  worth noting.
+It mostly supports it. If E depended on the amount of material, I would
+expect E to change smoothly as thickness increases. Instead, all the
+dots fall within a range of about 9,900 to 10,700, and there’s no steady
+rise or fall from one thickness to the next. The purple (thickest)
+plates sit a bit lower than the rest, which is something worth noting,
+but it’s only one thickness, not a smooth trend.
 
-  - Is this evidence *conclusive* one way or another? No. The sample is
-    small (only about five plates per thickness), so it may not be
-    representative, and it doesn’t account for other variables that
-    could affect E.
+- Is this evidence *conclusive* one way or another? No. The sample is
+  small (only about five plates per thickness), so it may not be
+  representative, and it doesn’t account for other variables that could
+  affect E.
 
 # References
 
