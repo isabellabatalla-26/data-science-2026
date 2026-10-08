@@ -266,52 +266,44 @@ variables; think about using different aesthetics or facets.
 ``` r
 ## TASK: Create a visual of gdpPercap vs continent
 gapminder %>%
-  filter(
-    year == year_min,
-    gdpPercap < 30000
-  ) %>%
+  filter(year %in% c(year_min, year_max)) %>%
   ggplot(aes(x = continent, y = gdpPercap)) +
   geom_boxplot() +
   geom_point(
     data = . %>% filter(
-    year == year_min,
-    gdpPercap > 10000
-  ),
+      country %in% c(
+        "Australia", "Canada", "Kuwait", "New Zealand",
+        "Norway", "Switzerland", "United States"
+      )
+    ),
     mapping = aes(color = country),
     size = 2
+
+  ) +
+  scale_y_log10() +
+  facet_grid(~ year) +
+  labs(
+    title = "GDP per capita by continent, 1952 vs. 2007",
+    x = "Continent",
+    y = "GDP per capita (log scale)",
+    color = "Country"
   )
 ```
 
 ![](c04-gapminder-assignment_files/figure-gfm/q4-task-1.png)<!-- -->
 
-``` r
-gapminder %>%
-  filter(
-    year == year_max
-  ) %>%
-  ggplot(aes(x = continent, y = gdpPercap)) +
-  geom_boxplot() +
-  geom_point(
-    data = . %>% filter(country %in% c("Australia", "Canada", "New Zealand", "Norway", "Switzerland", "United States", "Kuwait")),
-    mapping = aes(color = country),
-    size = 2
-  )
-```
+**Observations**:
 
-![](c04-gapminder-assignment_files/figure-gfm/q4-task-2.png)<!-- -->
-
-**Observations**: After plotting the data, only highlighting the
-outliers from Q3, we are able to see some patterns and changes. Both
-Canada and the United States remain significant ouliers in the Americas
-boxplot. Although not all are outliers, most of the ouliers in the
-Americas, Asia, and Europe maintain a higher GDP per capita. The
-countries that dont’, however, are Switzerland and New Zeland. New
-Zeland is seen to actually drop below Australia in GDP. Switzerland is
-seen to drop in standing (not actual GDP) from being a noticable outlier
-to being a country within the 3rd quartile.
-
-One things to note: Most, if not all, countries saw and increase in GDP
-per capita.
+After plotting the data and highlighting only the outliers from q3, we
+can see some patterns and changes. Kuwait is by far the highest GDP per
+capita in 1952, but it falls to about by 2007, the only highlighted
+country whose GDP per capita decreased. Canada and the United States
+remain outliers in the Americas in both years. Switzerland is one of the
+highest in 1952 but no longer stands out from the rest of Europe in
+2007. New Zealand is above Australia in 1952 but falls below Australia
+in 2007. The median GDP per capita is higher in 2007 than in 1952 for
+every continent. Among the highlighted countries, all but Kuwait have a
+higher GDP per capita in 2007.
 
 # Your Own EDA
 
@@ -327,36 +319,32 @@ the relationship between variables, or something else entirely.
 ``` r
 ## TASK: Your first graph
 Africa_LifeExp_Under35 <- gapminder  %>%
-    filter(
+  filter(
     year == year_min,
     continent == "Africa",
     lifeExp < 35
   )
 
-countries_in_data = Africa_LifeExp_Under35 %>% 
+countries_in_data <- Africa_LifeExp_Under35 %>% 
   pull(country)
 
-
-Africa_LifeExp_Under35%>%
-  ggplot(aes(x = country, y = lifeExp)) +
-   geom_point() +
-  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
-```
-
-![](c04-gapminder-assignment_files/figure-gfm/q5-task1-1.png)<!-- -->
-
-``` r
 gapminder %>%
   filter(
-    year == year_max,
+    year %in% c(year_max,year_min),
     country %in% countries_in_data
   ) %>%
   ggplot(aes(x = country, y = lifeExp)) +
-   geom_point() +
-  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
+  geom_point() +
+  facet_grid(year~.) +
+  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0)) +
+  labs(
+    title = "Life expectancy in African countries under 35 in 1952",
+    x = "Country",
+    y = "Life expectancy (years)"
+  )
 ```
 
-![](c04-gapminder-assignment_files/figure-gfm/q5-task1-2.png)<!-- -->
+![](c04-gapminder-assignment_files/figure-gfm/q5-task1-1.png)<!-- -->
 
 - For these graphs, I wanted to see how life expectancy changed in
   Africa with countries that had a life expectancy under 35 for the year
@@ -380,30 +368,22 @@ lowest GDP per capita growth?
 ## TASK: Your second graph
 gapminder %>%
   filter(
-    year == 1987,
+    year %in% c(1987, year_max),
     continent == "Americas",
     lifeExp > 75
   ) %>%
   ggplot(aes(x = country, y = lifeExp)) +
-   geom_point() +
-  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
+  geom_point() +
+  facet_wrap(~ year, scales = "free_x") +
+  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0)) +
+  labs(
+    title = "Countries in the Americas with life expectancy over 75",
+    x = "Country",
+    y = "Life expectancy (years)"
+  )
 ```
 
 ![](c04-gapminder-assignment_files/figure-gfm/q5-task2-1.png)<!-- -->
-
-``` r
-gapminder %>%
-  filter(
-    year == year_max,
-    continent == "Americas",
-    lifeExp > 75
-  ) %>%
-  ggplot(aes(x = country, y = lifeExp)) +
-   geom_point() +
-  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
-```
-
-![](c04-gapminder-assignment_files/figure-gfm/q5-task2-2.png)<!-- -->
 
 - For these graphs I wanted to see which countries in the Americas had a
   life expectancy over 75 in 1987 compared to 2007. In 1987, only two
@@ -420,33 +400,26 @@ Questions about the data:
 period?
 
 ``` r
-## TASK: Your third graph
+# TASK: Your third graph
 gapminder %>%
   filter(
-    year == 1987,
     lifeExp > 60,
-    gdpPercap > 25000
+    (year == 1987 & gdpPercap > 25000) |
+      (year == year_max & gdpPercap > 35000)
   ) %>%
-  ggplot(aes(x = country, y = lifeExp)) +
-   geom_point() +
-  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
+  ggplot(aes(x = country, y = lifeExp, color = year)) +
+  geom_point(size = 3) +
+  facet_wrap(~ year, scales = "free_x") +
+  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0)) +
+  labs(
+    title = "Life expectancy of high-income countries, 1987 vs. 2007",
+    x = "Country",
+    y = "Life expectancy (years)",
+    color = "Year"
+  )
 ```
 
 ![](c04-gapminder-assignment_files/figure-gfm/q5-task3-1.png)<!-- -->
-
-``` r
-gapminder %>%
-  filter(
-    year == year_max,
-    lifeExp > 60,
-    gdpPercap > 35000
-  ) %>%
-  ggplot(aes(x = country, y = lifeExp)) +
-   geom_point() +
-  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
-```
-
-![](c04-gapminder-assignment_files/figure-gfm/q5-task3-2.png)<!-- -->
 
 - For these graphs, I wanted to see which countries had a GDP per capita
   above \$25,000 and a life expectancy above 60 in 1987? By year_max,
