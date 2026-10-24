@@ -82,21 +82,26 @@ In this visual you must show *all three* effectiveness values for *all 16 bacter
 
 ```{r q1.1}
 # WRITE YOUR CODE HERE
-df_antibiotics %>%
-  ggplot(aes(penicillin, streptomycin)) +
-  geom_point(aes(color = bacteria, size = neomycin)) +
-  facet_wrap(~gram) +
+
+df_long <- df_antibiotics %>%
+  pivot_longer(
+    cols = c(penicillin, streptomycin, neomycin),
+    names_to = "antibiotic",
+    values_to = "mic"
+  )
+
+df_long %>%
+  mutate(bacteria = fct_reorder(bacteria, mic)) %>%
+  ggplot(aes(mic, bacteria)) +
+  geom_point(aes(color = antibiotic, shape = antibiotic)) +
+  geom_vline(xintercept = 0.1) +
+  facet_wrap(~gram, scales = "free_y") +
+  scale_x_log10() +
   theme(
-    # Reduce text size
     legend.title = element_text(size = 8, face = "bold"),
     legend.text = element_text(size = 7),
-    
-    # Shrink the box around each legend symbol
     legend.key.size = unit(0.3, "cm"),
-    
-    # Reduce spacing between legend items
     legend.spacing.y = unit(0.1, "cm"))
-
 
 
 ```
@@ -116,15 +121,13 @@ df_long <- df_antibiotics %>%
     values_to = "mic"
   )
 
+
 df_long %>%
-  ggplot(aes(x = antibiotic, y = mic, color = gram)) +
-  geom_point() +
-  facet_wrap(~bacteria) +
-  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0)) +
-  scale_y_log10() +
-  labs(
-    y = "MIC (log scale, lower = more effective)"
-  )
+  mutate(bacteria = fct_reorder(bacteria, mic)) %>%
+  ggplot(aes(antibiotic, bacteria)) +
+  geom_text(aes(label = mic)) +
+  facet_wrap(~gram, scales = "free_y")
+
 
 ```
 
@@ -147,9 +150,10 @@ df_long <- df_antibiotics %>%
 
 df_long %>%
   ggplot(aes(antibiotic, mic)) +
-   geom_boxplot() +
+  geom_boxplot() +
   geom_point(
-    aes(color = bacteria)) +
+    aes(color = gram)) +
+  geom_hline(yintercept = 0.1) +
   scale_y_log10()
   
 ```
@@ -175,7 +179,13 @@ df_long %>%
   ggplot(aes(x = antibiotic, y = 1, fill = gram)) +
   geom_col(color = "black") +
   geom_text(aes(label = bacteria),
-             position = position_stack(vjust = 0.5), size = 2.75)
+             position = position_stack(vjust = 0.5), size = 2.75) +
+  labs(
+    title = "Which antibiotic is most effective for each bacterium?",
+    x = "Most effective antibiotic",
+    y = "Number of bacteria",
+    fill = "Gram stain"
+  )
 ```
 
 #### Visual 5 (Some variables)
@@ -187,19 +197,39 @@ Note that your visual must be *qualitatively different* from *all* of your other
 ```{r q1.5}
 # WRITE YOUR CODE HERE
 
+# 
+# filtered_by_genus <- 
+#   df_long %>%
+#   mutate(sep_bacteria = str_remove(bacteria, "\\s+\\([^\\)]+\\)")) %>%
+#   separate(sep_bacteria, into = c("genus", "species"), sep = " ")
+# 
+# 
+# filtered_by_genus %>%
+#   ggplot(aes(species, mic)) +
+#   geom_point(aes(color = antibiotic), size = 2) +
+#   facet_grid(~genus, scales = "free_x") +
+#   scale_y_log10() +
+#   theme(
+#     axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0),
+#     strip.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0),
+#   )
+
+
+# WRITE YOUR CODE HERE
 
 filtered_by_genus <- 
-  df_long %>%
+  df_antibiotics %>%
   mutate(sep_bacteria = str_remove(bacteria, "\\s+\\([^\\)]+\\)")) %>%
   separate(sep_bacteria, into = c("genus", "species"), sep = " ")
 
 filtered_by_genus %>%
-  ggplot(aes(species, mic)) +
-  geom_point(aes(color = antibiotic), size = 2) +
-  facet_wrap(~genus, scales = "free_x") +
-  scale_y_log10() +
-  theme(axis.text.x = element_text(angle = 270, vjust = 0.5, hjust = 0))
-
+  ggplot(aes(neomycin, streptomycin)) +
+  geom_point(aes(color = genus), size = 2) +
+  geom_text_repel(aes(label = bacteria), size = 2.5) +
+  geom_hline(yintercept = 0.1) +
+  geom_vline(xintercept = 0.1) +
+  scale_x_log10() +
+  scale_y_log10()
 ```
 
 ### **q2** Assess your visuals
@@ -214,11 +244,11 @@ There are **two questions** below; use your five visuals to help answer both Gui
 
 > How do the three antibiotics vary in their effectiveness against bacteria of different genera and Gram stain?
 
-*Observations* - What is your response to the question above? - For penicillin, most positive gram bacteria have lower MIC, meaning that they are more effective. For negative gram bacteria, however, they are more resistant to Penicillin, especially Aerobacter aerogenes.
+*Observations* - What is your response to the question above? - For penicillin, most positive gram bacteria have lower MIC, meaning that they are more effective. For negative gram bacteria, however, they are more resistant to Penicillin, including Aerobacter aerogenes and several others.
 
-For streptomycin, there doesn't seem to be a certain kind of gram bacteria that it is more effective for. The effectiveness seems to just be dependent onf the bacteria itself, not it's gram.
+For streptomycin, there doesn't seem to be a certain kind of gram bacteria that it is more effective for. The effectiveness seems to just be dependent on the bacteria itself, not its gram.
 
-For neomycin, it's effectiveness is similar to streptomycin in that it isn't 'better' for positive or negative gram bacteria.
+For neomycin, its effectiveness is similar to streptomycin in that it isn't 'better' for positive or negative gram bacteria.
 
 One thing to note: For the most part, both neomycin and streptomycin are more effective for gram negative bacteria than penicillin.
 
@@ -228,7 +258,7 @@ My second visual.
 
 - Why? -
 
-While it doesn't show the exact values of the MIC, my second visual does split each graph by bacteria, with the type of antibiotic on the x axis and MIC (in log form), and differentiates the gram of the bacteria by color. In doing this, it is easier to gauge the effectiveness each antibiotic has on each bacteria.
+After revising my second visual to show the actual MIC values for each antibiotic, it became much easier to judge how effective each antibiotic is against each bacterium. My other visuals show values as positions on a log-scaled axis, so you can see the pattern but not the true number. Printing the values lets me compare them directly against the 0.1 threshold. Splitting by Gram stain also lets me compare the positive and negative groups side by side.
 
 #### Guiding Question 2
 
@@ -238,7 +268,7 @@ In 1974 *Diplococcus pneumoniae* was renamed *Streptococcus pneumoniae*, and in 
 
 *Observations* - What is your response to the question above?
 
-It's possible that Diplococcus pneumoniae was renamed Streptococcus pneumoniae due to the similarities it shares with the 'Streptococcus' genus. If we take a look at the the antibiotic effectiveness based on genus, it can be seen how Diplococcus pneumoniae shares antibiotic effectiveness. Since both Diplococcus and Streptococcus are gram positive, they react similar to penicillin. It's the similar effectiveness of streptomycin and neomycin that Diplococcus pneumoniae shares with the 'Streptococcus' genus.
+It’s possible that Diplococcus pneumoniae was renamed Streptococcus pneumoniae due to the similarities it shares with the ‘Streptococcus’ genus. In my fifth visual, Diplococcus pneumoniae sits close to the Streptococcus bacteria for neomycin and streptomycin, which suggests it responds to those antibiotics similarly. Since both are gram positive, they also react similarly to penicillin, which I can see in the values in my second visual.
 
 - Which of your visuals above (1 through 5) is **most effective** at helping to answer this question?
 
@@ -246,8 +276,7 @@ My fifth visual
 
 - Why?
 
-My fifth visual was the most effective, because the visual facets by genus. In faceting by genus, we can see the similarities bacteria with the same genus share, and why some may have been renamed.
-
+In my fifth visual, I plotted neomycin against streptomycin and colored the points by genus, which lets me see which bacteria cluster together even when they belong to different genera. Faceting by genus, as my earlier version did, put Diplococcus and Streptococcus in separate panels, so I couldn’t compare them. The scatterplot puts them on the same axes, so I can see how close together they are.
 # References
 
 <!-- -------------------------------------------------- -->
